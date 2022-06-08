@@ -10,3 +10,7 @@
 .collection-sort:first-child {
   padding-right: 20px;
 }
+
+.categories {
+  text-transform: capitalize;
+}

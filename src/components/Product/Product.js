@@ -1,4 +1,4 @@
-import "./product.css";
+import "./Product.css";
 
 const Product = ({
   price,
@@ -13,7 +13,7 @@ const Product = ({
       </div>
       <div className="product-info">
         <h5 description={title}>{title}</h5>
-        <h6 price={price}>{price}</h6>
+        <h6 price={price}>{price} $</h6>
       </div>
     </div>
   );

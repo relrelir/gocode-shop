@@ -1,22 +1,31 @@
 import Product from "../Product/Product.js";
-import products from "./products.css";
+import "./Products.css";
 
-const Products = ({ collection }) => {
+const Products = ({ collection, filterCategory }) => {
   return (
     <section className="products">
-      {collection.map((prop) => (
-        <Product
-          image={prop.image}
-          key={prop.id}
-          title={prop.title}
-          category={prop.category}
-          rating={prop.rating}
-          rate={prop.rate}
-          count={prop.count}
-          price={prop.price}
-          description={prop.description}
-        />
-      ))}
+      {collection.map(
+        ({
+          image,
+          id,
+          title,
+          category,
+          price,
+          description,
+          rating: { rate, count },
+        }) => (
+          <Product
+            image={image}
+            key={id}
+            title={title}
+            category={category}
+            count={count}
+            rate={rate}
+            price={price}
+            description={description}
+          />
+        )
+      )}
     </section>
   );
 };
