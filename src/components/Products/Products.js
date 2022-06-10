@@ -1,7 +1,7 @@
 import Product from "../Product/Product.js";
 import "./Products.css";
 
-const Products = ({ collection, filterCategory }) => {
+const Products = ({ collection }) => {
   return (
     <section className="products">
       {collection.map(

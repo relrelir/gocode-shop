@@ -1,13 +1,6 @@
 import "./Header.css";
 
-const Header = ({ setCategory, collection }) => {
-  const categories = collection
-    .map((product) => product.category)
-    .filter(
-      //returns only categories on theire first show of the collection array in Alphabetical order
-      (category, index, categories) => categories.indexOf(category) === index
-    )
-    .sort();
+const Header = ({ setCategory, categories }) => {
   return (
     <nav className="product-filter">
       <h1>Jackets</h1>
