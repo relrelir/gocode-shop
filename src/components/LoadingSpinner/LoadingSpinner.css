@@ -6,7 +6,8 @@
 }
 
 .example {
-  display: block;
+  display: flex;
+  align-items: center;
   height: 200px;
   position: relative;
   letter-spacing: 0.5px;

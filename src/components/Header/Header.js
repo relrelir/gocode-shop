@@ -1,10 +1,9 @@
 import "./Header.css";
 
-const Header = ({ setCategory, categories }) => {
+const Header = ({ setCategory, categories, fetchProducts }) => {
   return (
     <nav className="product-filter">
       <h1>Jackets</h1>
-
       <div className="sort">
         <div className="collection-sort">
           <label>Filter by:</label>
@@ -12,7 +11,7 @@ const Header = ({ setCategory, categories }) => {
             className="categories"
             onChange={(event) => {
               let category = event.currentTarget.value;
-              setCategory(category); //the logic that changes the value of the arr "category" from the useState HOOK. according to the category from the event.currentTarget.value of the onChange attribute;
+              setCategory(category);
               console.log(category);
             }}
           >
@@ -23,6 +22,7 @@ const Header = ({ setCategory, categories }) => {
               </option>
             ))}
           </select>
+          <button onClick={fetchProducts}>fetchProducts</button>
         </div>
 
         <div className="collection-sort">

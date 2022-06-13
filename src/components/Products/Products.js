@@ -1,10 +1,10 @@
 import Product from "../Product/Product.js";
 import "./Products.css";
 
-const Products = ({ collection }) => {
+const Products = ({ filteredProducts }) => {
   return (
     <section className="products">
-      {collection.map(
+      {filteredProducts.map(
         ({
           image,
           id,
@@ -17,6 +17,7 @@ const Products = ({ collection }) => {
           <Product
             image={image}
             key={id}
+            id={id}
             title={title}
             category={category}
             count={count}
