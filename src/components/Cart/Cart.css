@@ -1,0 +1,17 @@
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.cart-image {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

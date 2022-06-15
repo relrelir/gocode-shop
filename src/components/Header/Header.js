@@ -1,6 +1,6 @@
 import "./Header.css";
 
-const Header = ({ setCategory, categories, fetchProducts }) => {
+const Header = ({ setCategory, categories }) => {
   return (
     <nav className="product-filter">
       <h1>Jackets</h1>
@@ -22,7 +22,7 @@ const Header = ({ setCategory, categories, fetchProducts }) => {
               </option>
             ))}
           </select>
-          <button onClick={fetchProducts}>fetchProducts</button>
+          {/* <button onClick={fetchProducts}>fetchProducts</button> */}
         </div>
 
         <div className="collection-sort">
