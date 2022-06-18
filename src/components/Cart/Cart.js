@@ -12,57 +12,68 @@ const Cart = () => {
 
   return itemsInCart.length > 0 ? (
     itemsInCart.map(({ product, quantity, note }, index) => (
-      <Drawer
-        anchor="right"
-        open={isCartOpen}
-        onClose={() => setIsCartOpen(true)}
-      >
-        <box
-          padding={2}
-          width={"250px"}
-          textAlign={"center"}
-          role={"presentation"}
+      <>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="logo"
+          onClick={() => setIsCartOpen(true)}
         >
-          <Typography variant="h6" component="div">
-            {" "}
-            Your Cart:{" "}
-          </Typography>
-          <img width={"15%"} cart-image="cart-image" src={product.image} />
+          <MenuIcon />
+        </IconButton>
+        <Drawer
+          anchor="right"
+          open={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+        >
+          <box
+            padding={2}
+            width={"250px"}
+            textAlign={"center"}
+            role={"presentation"}
+          >
+            <Typography variant="h6" component="div">
+              {" "}
+              Your Cart:{" "}
+            </Typography>
+            <img width={"15%"} cart-image="cart-image" src={product.image} />
 
-          <button
-            width={"15%"}
-            onClick={() => {
-              updateCartItem(index, product, quantity - 1, cartItem?.note);
-              total();
-            }}
-          >
-            -
-          </button>
-          <input
-            size={1}
-            value={quantity}
-            onChange={(event) => {
-              updateCartItem(
-                index,
-                product,
-                event.target.value,
-                cartItem?.note
-              );
-              total();
-            }}
-          />
-          <button
-            onClick={() => {
-              updateCartItem(index, product, ++quantity, cartItem?.note);
-              total();
-            }}
-          >
-            +
-          </button>
-          <span className="cart">{product.title}</span>
-          <span className="cart">Price: {product.price}$</span>
-        </box>
-      </Drawer>
+            <button
+              width={"15%"}
+              onClick={() => {
+                updateCartItem(index, product, quantity - 1, cartItem?.note);
+                total();
+              }}
+            >
+              -
+            </button>
+            <input
+              size={1}
+              value={quantity}
+              onChange={(event) => {
+                updateCartItem(
+                  index,
+                  product,
+                  event.target.value,
+                  cartItem?.note
+                );
+                total();
+              }}
+            />
+            <button
+              onClick={() => {
+                updateCartItem(index, product, ++quantity, cartItem?.note);
+                total();
+              }}
+            >
+              +
+            </button>
+            <span className="cart">{product.title}</span>
+            <span className="cart">Price: {product.price}$</span>
+          </box>
+        </Drawer>
+      </>
     ))
   ) : (
     <div>
