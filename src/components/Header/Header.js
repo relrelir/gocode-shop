@@ -1,28 +1,56 @@
 import "./Header.css";
 
-const Header = ({ setCategory, categories }) => {
+import { useState } from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+
+const Header = ({
+  setCurrentCategory,
+  categories,
+  currentCategory,
+  setCurrentPricesRange,
+  currentPricesRange,
+  setCurrentrate,
+  currentrate,
+}) => {
   return (
     <nav className="product-filter">
-      <h1>Jackets</h1>
+      <h1>GoCode Shop</h1>
       <div className="sort">
+        <Box paddingRight={"100px"} sx={{ width: 250 }}>
+          <Slider
+            valueLabelDisplay="on"
+            getAriaLabel={() => "prices range"}
+            value={currentPricesRange}
+            onChange={(e, newValue) => {
+              setCurrentPricesRange(newValue);
+            }}
+            // getAriaValueText={valuetext}
+            max={1000}
+          />
+        </Box>
         <div className="collection-sort">
           <label>Filter by:</label>
           <select
+            defaultValue={currentCategory}
             className="categories"
             onChange={(event) => {
-              let category = event.currentTarget.value;
-              setCategory(category);
-              console.log(category);
+              let category = event.target.value;
+              setCurrentCategory(category);
             }}
           >
             <option value="all">All</option>
             {categories.map((category, index) => (
-              <option key={index} value={category}>
+              <option
+                key={index}
+                value={category}
+                // selected={currentCategory === category}
+              >
                 {category}
               </option>
             ))}
           </select>
-          {/* <button onClick={fetchProducts}>fetchProducts</button> */}
         </div>
 
         <div className="collection-sort">

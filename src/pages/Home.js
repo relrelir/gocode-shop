@@ -7,16 +7,29 @@ import cartContext from "../context/cartContext.js";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [category, setCategory] = useState("all");
+  const [categories, setCategories] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState("all");
+  const [currentPricesRange, setCurrentPricesRange] = useState([0, 10000]);
+  const [currentrate, setCurrentrate] = useState(null);
+
   const { products, setProducts, cartTotal } = useContext(cartContext);
 
   function fetchProducts() {
     setIsLoading(true);
 
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://gocode-bituach-yashir.glitch.me/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(() => data);
+        setCategories(() =>
+          data
+            .map((product) => product.category)
+            .filter(
+              (category, index, categories) =>
+                categories.indexOf(category) === index
+            )
+            .sort()
+        );
         setIsLoading(false);
       })
       .catch((err) => {
@@ -29,34 +42,38 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  const categories = products
-    .map((product) => product.category)
-    .filter(
-      (category, index, categories) => categories.indexOf(category) === index
-    )
-    .sort();
+  const byRating = (product, rate) => rate <= product.rate;
+  const byCategory = (product, category) =>
+    category === "all" || product.category === category;
 
-  const filteredProducts = products.filter((product) =>
-    category === "all" ? true : product.category === category
+  const byPricesRange = (product, pricesRange) =>
+    pricesRange[0] < product.price && product.price < pricesRange[1];
+
+  const filteredProducts = products.filter(
+    (product) =>
+      byCategory(product, currentCategory) &&
+      byPricesRange(product, currentPricesRange) &&
+      byRating(product, currentrate)
   );
 
   return (
     <div>
+      <Header
+        setCurrentCategory={setCurrentCategory}
+        currentCategory={currentCategory}
+        categories={categories}
+        setCurrentPricesRange={setCurrentPricesRange}
+        currentPricesRange={currentPricesRange}
+        setCurrentrate={setCurrentrate}
+        currentrate={currentrate}
+      />
+
       {isLoading ? (
         <LoadingSpinner />
       ) : !products.length ? (
-        <p>
-          Request Failed TypeError: Failed to fetch at fetchProducts Failed to
-          load responsed data: No data found for resource with given identifier
-        </p>
+        <p>Request Failed</p>
       ) : filteredProducts.length ? (
         <>
-          <Header
-            setCategory={setCategory}
-            categories={categories}
-            fetchProducts={fetchProducts}
-          />
-
           <Products filteredProducts={filteredProducts} />
 
           <h3>Cart</h3>

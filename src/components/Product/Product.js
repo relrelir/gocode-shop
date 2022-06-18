@@ -12,8 +12,8 @@ import { red } from "@mui/material/colors";
 import IconButton from "@mui/material/IconButton";
 
 const Product = (product) => {
-  let { id, price, title, image, rate } = product;
   const { itemsInCart, updateCartItem, total } = useContext(cartContext);
+  let { id, price, title, image, rate } = product;
 
   let index = itemsInCart.findIndex(({ product: { id } }) => id === product.id);
 
@@ -22,7 +22,7 @@ const Product = (product) => {
   let quantity = cartItem ? cartItem.quantity : 0;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 500 }}>
       <CardHeader
         title={title}
         action={<IconButton aria-label="settings"></IconButton>}
