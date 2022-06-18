@@ -52,8 +52,9 @@ export default function Home() {
   const filteredProducts = products.filter(
     (product) =>
       byCategory(product, currentCategory) &&
-      byPricesRange(product, currentPricesRange) &&
-      byRating(product, currentrate)
+      byPricesRange(product, currentPricesRange)
+    // &&
+    // byRating(product, currentrate)
   );
 
   return (
