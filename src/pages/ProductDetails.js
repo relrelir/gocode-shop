@@ -1,5 +1,7 @@
+import { Rating } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Header from "../components/Header/Header.js";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.js";
 import cartContext from "../context/cartContext";
 
@@ -44,6 +46,13 @@ export default function ProductDetails() {
 
   return (
     <div>
+      {/* <Header
+        setCurrentCategory={setCurrentCategory}
+        currentCategory={currentCategory}
+        categories={categories}
+        setCurrentPricesRange={setCurrentPricesRange}
+        currentPricesRange={currentPricesRange}
+      /> */}
       {isLoading ? (
         <LoadingSpinner />
       ) : product ? (
