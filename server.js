@@ -153,9 +153,9 @@ app.delete("/api/products/:productId", (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get("*", (_, res) => {
-  res.sendFile(__dirname + "/client/build/index.html");
-});
+// app.get("*", (_, res) => {
+//   res.sendFile("/client/build/index.html");
+// });
 
 const PORT = process.env.PORT || 8000;
 
