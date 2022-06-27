@@ -159,7 +159,7 @@ app.get("*", (_, res) => {
 
 const PORT = process.env.PORT || 8000;
 
-const { mongodb_pass, mongodb_user, mongodb_host, mongodb_name } = prosses.env;
+const { mongodb_pass, mongodb_user, mongodb_host, mongodb_name } = process.env;
 
 mongoose
   .connect(
