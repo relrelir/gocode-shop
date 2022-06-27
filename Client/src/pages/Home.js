@@ -12,12 +12,12 @@ export default function Home() {
   const [currentPricesRange, setCurrentPricesRange] = useState([0, 10000]);
   const [currentrate, setCurrentrate] = useState(null);
 
-  const { products, setProducts, cartTotal } = useContext(cartContext);
+  const { products, setProducts, price } = useContext(cartContext);
 
   function fetchProducts() {
     setIsLoading(true);
 
-    fetch("https://gocode-bituach-yashir.glitch.me/products")
+    fetch("/api/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(() => data);
@@ -43,6 +43,7 @@ export default function Home() {
   }, []);
 
   const byRating = (product, rate) => rate <= product.rate;
+
   const byCategory = (product, category) =>
     category === "all" || product.category === category;
 
@@ -67,6 +68,7 @@ export default function Home() {
         currentPricesRange={currentPricesRange}
         setCurrentrate={setCurrentrate}
         currentrate={currentrate}
+        price={price}
       />
 
       {isLoading ? (
@@ -74,13 +76,7 @@ export default function Home() {
       ) : !products.length ? (
         <p>Request Failed</p>
       ) : filteredProducts.length ? (
-        <>
-          <Products filteredProducts={filteredProducts} />
-
-          <h3>Cart</h3>
-          <Cart />
-          <h5>TotalPrice:{cartTotal}</h5>
-        </>
+        <Products filteredProducts={filteredProducts} />
       ) : (
         <p>No results!</p>
       )}

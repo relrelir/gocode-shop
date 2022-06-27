@@ -1,13 +1,15 @@
+import { Grid } from "@mui/material";
+
 import Product from "../Product/Product.js";
 import "./Products.css";
 
 const Products = ({ filteredProducts }) => {
   return (
-    <section className="products">
+    <Grid item xs={4} sm={4} md={4} spacing={2}>
       {filteredProducts.map(
         ({
           image,
-          id,
+          _id,
           title,
           category,
           price,
@@ -16,8 +18,8 @@ const Products = ({ filteredProducts }) => {
         }) => (
           <Product
             image={image}
-            key={id}
-            id={id}
+            key={_id}
+            id={_id}
             title={title}
             category={category}
             count={count}
@@ -27,7 +29,7 @@ const Products = ({ filteredProducts }) => {
           />
         )
       )}
-    </section>
+    </Grid>
   );
 };
 

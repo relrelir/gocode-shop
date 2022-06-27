@@ -1,0 +1,37 @@
+p {
+  font-family: fantasy;
+  display: flex;
+
+  background: linear-gradient(
+    0.25turn,
+    #3f87a6,
+    #ebf8e1,
+    #ebf8e1,
+    #ebf8e1,
+    #f69d3c
+  );
+  font-family: fantasy;
+  flex-direction: row-reverse;
+
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  outline: auto;
+}
+
+/* .footer {
+  background: linear-gradient(
+    0.25turn,
+    #3f87a6,
+    #ebf8e1,
+    #ebf8e1,
+    #ebf8e1,
+    #f69d3c
+  );
+  font-family: fantasy;
+  display: flex;
+  flex-direction: row-reverse;
+
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  outline: auto;
+} */

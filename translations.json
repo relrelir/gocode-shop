@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "en": "What",
+    "he": "ma"
+  },
+  {
+    "id": 2,
+    "en": "Hello",
+    "he": "shalom"
+  },
+  {
+    "id": 3,
+    "en": "Server",
+    "he": "sharat"
+  },
+  {
+    "id": 4,
+    "en": "Joke",
+    "he": "bdicha"
+  },
+  {
+    "id": 5,
+    "en": "Computer",
+    "he": "machshev"
+  },
+  {
+    "id": 6,
+    "en": "Love",
+    "he": "ahava"
+  },
+  {
+    "id": 7,
+    "en": "Home",
+    "he": "bait"
+  },
+  {
+    "id": 8,
+    "en": "Door",
+    "he": "delet"
+  },
+  {
+    "id": 9,
+    "en": "Route",
+    "he": "maslul"
+  },
+  {
+    "id": 10,
+    "en": "End",
+    "he": "sof"
+  }
+]
