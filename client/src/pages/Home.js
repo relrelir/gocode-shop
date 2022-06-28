@@ -48,7 +48,7 @@ export default function Home() {
     category === "all" || product.category === category;
 
   const byPricesRange = (product, pricesRange) =>
-    pricesRange[0] < product.price && product.price < pricesRange[1];
+    pricesRange[0] <= product.price && product.price <= pricesRange[1];
 
   const filteredProducts = products.filter(
     (product) =>

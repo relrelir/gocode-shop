@@ -5,7 +5,13 @@ import "./Products.css";
 
 const Products = ({ filteredProducts }) => {
   return (
-    <Grid item xs={4} sm={4} md={4}>
+    <Grid
+      container
+      direction="row"
+      justifyContent="space-evenly"
+      alignItems="stretch"
+      spacing={2}
+    >
       {filteredProducts.map(
         ({
           image,
@@ -16,17 +22,18 @@ const Products = ({ filteredProducts }) => {
           description,
           rating: { rate, count },
         }) => (
-          <Product
-            image={image}
-            key={_id}
-            id={_id}
-            title={title}
-            category={category}
-            count={count}
-            rate={rate}
-            price={price}
-            description={description}
-          />
+          <Grid item xs={12} md={4} key={_id}>
+            <Product
+              image={image}
+              id={_id}
+              title={title}
+              category={category}
+              count={count}
+              rate={rate}
+              price={price}
+              description={description}
+            />
+          </Grid>
         )
       )}
     </Grid>
