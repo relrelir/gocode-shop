@@ -1,10 +1,8 @@
 import express from "express";
-// import * as fsp from "fs/promises";
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// import http from "http";
-// import { request } from "https";
+
 dotenv.config();
 const app = express();
 
@@ -13,6 +11,7 @@ const Product = mongoose.model("Product", {
   price: Number,
   description: String,
   image: String,
+  category: String,
   rating: { rate: Number, count: Number },
 });
 
@@ -27,80 +26,47 @@ app.get("/api", (_, res) => {
 app.get("/api/products", (_, res) => {
   Product.find()
     .then((products) => {
-      // if (products.length >= 0) {
-      res.send(products).status(200);
-      // }
+      if (products.length >= 0) {
+        res.send(products).status(200);
+      }
     })
     .catch((err) => {
       console.log("error");
       res.send(err).status(500);
     });
+});
 
-  // fsp
-  //   .readFile("./products.json", "utf-8")
-  //   .then((data) => {
-  //     const products = JSON.parse(data);
-
-  //     if (products.length > 0) {
-  //       res.send(products);
-  //       console.log("products delivered");
-  //     } else {
-  //       res.send("no products");
-  //       console.log("no products");
-  //     }
-  //   })
-  //   .catch((eror) => {
-  //     console.log("eror1");
-  //     send(eror);
-  //   });
+app.get("/api/products", (_, res) => {
+  const { title } = req.query;
+  Product.find()
+    .then((products) => {
+      const includedProductsTitles = title
+        ? products.filter((product) =>
+            product.title.toLowerCase().includes(title.toLowerCase())
+          )
+        : res.send(includedProductsTitles).status(200);
+    })
+    .catch((err) => {
+      console.log("error");
+      res.send(err).status(500);
+    });
 });
 
 app.get("/api/products/:productId", (req, res) => {
   const { productId } = req.params;
 
   Product.findById(productId)
-    .then((productId) => {
-      if (Product !== undefined) {
-        const selectedProduct = Product.find(
-          (product) => product.id === +productId
-        );
-        console.log(selectedProduct);
-        res.send(selectedProduct).status(200);
+    .then((product) => {
+      console.log(product._id);
+      console.log(productId);
+      if (product !== undefined) {
+        res.send(product).status(200);
       }
     })
-
     .catch((error) => res.send(error).status(500));
-
-  // const products = JSON.parse(data);
-
-  // if (product !== undefined) {
-  //   res.send(product);
-  //   console.log(`product${productId}delivered`);
-  // } else {
-  //   res.send("Error, no product");
-  // }
 });
 
-// function getMaxId(products) {
-//   const ids = products.map((product) => {
-//     return product.id;
-//   });
-
-//   const max = Math.max(...ids);
-//   console.log(max);
-//   return max;
-// }
-
 app.post("/api/products", (req, res) => {
-  // const {
-  //   title,
-  //   price,
-  //   description,
-  //   category,
-  //   image,
-  //   rating: { rate, count },
-  // } = req.body;
-
   Product.insertMany(req.body)
     .then((products) => {
       res.send(products).status(200);

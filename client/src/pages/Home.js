@@ -26,7 +26,7 @@ export default function Home() {
             .map((product) => product.category)
             .filter(
               (category, index, categories) =>
-                categories.indexOf(category) === index
+                categories?.indexOf(category) === index
             )
             .sort()
         );
@@ -42,7 +42,7 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  const byRating = (product, rate) => rate <= product.rate;
+  // const byRating = (product, rate) => rate <= product.rate;
 
   const byCategory = (product, category) =>
     category === "all" || product.category === category;

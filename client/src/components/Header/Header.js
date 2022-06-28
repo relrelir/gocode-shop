@@ -27,24 +27,24 @@ const Header = ({
   currentrate,
   price,
 }) => {
-  const sortBy = [
-    "Featured,Best Selling",
-    "Alphabetically, A-Z",
-    "Alphabetically, Z-A",
-    "Price low to high",
-    "Price high to low",
-  ];
-  const { currentSort, setCurrentSort } = useState(sortBy[0]);
+  // const sortBy = [
+  //   "Featured,Best Selling",
+  //   "Alphabetically, A-Z",
+  //   "Alphabetically, Z-A",
+  //   "Price low to high",
+  //   "Price high to low",
+  // ];
+  // const { currentSort, setCurrentSort } = useState(sortBy[0]);
   const { setIsCartOpen } = useContext(cartContext);
 
   const handleChangeFiltering = (event) => {
     setCurrentCategory(event.target.value);
   };
-  const handleChangeSorting = (event) => {
-    setCurrentSort(event.target.value);
-  };
+  // const handleChangeSorting = (event) => {
+  //   setCurrentSort(event.target.value);
+  // };
 
-  console.log(currentSort);
+  // console.log(currentSort);
   return (
     <nav>
       <h1>GoCode Shop</h1>
@@ -86,23 +86,26 @@ const Header = ({
               label="Categories"
             >
               <MenuItem value="all">All Products</MenuItem>
-              {categories.map((category, index) => (
-                <MenuItem
-                  key={index}
-                  value={category}
-                  selected={currentCategory === category}
-                  helperText="Please select category"
-                >
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </MenuItem>
-              ))}
+              {categories.map((category, index) => {
+                console.log("category", category);
+                return (
+                  <MenuItem
+                    key={index}
+                    value={category}
+                    selected={currentCategory === category}
+                    helperText="Please select category"
+                  >
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </MenuItem>
+                );
+              })}
 
               <br />
             </Select>
           </FormControl>
         </Box>
 
-        <Box>
+        {/* <Box>
           <FormControl sx={{ m: 1, minWidth: 80 }}>
             <InputLabel id="simple-select-autowidth-label">Sort by:</InputLabel>
             <Select
@@ -127,7 +130,7 @@ const Header = ({
               <br />
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
 
         {/* <div className="collection-sort">
           <label>Sort by:</label>
