@@ -60,7 +60,6 @@ function App() {
       >
         {" "}
         <Drawer
-          sx={"flex"}
           anchor="right"
           open={isCartOpen}
           onClose={() => setIsCartOpen(false)}

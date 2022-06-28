@@ -15,7 +15,6 @@ import { Grid, Rating } from "@mui/material";
 const Product = (product) => {
   const { itemsInCart, updateCartItem, totalPrice } = useContext(cartContext);
   let { id, price, title, image, rate, category } = product;
-  console.log(rate);
 
   let index = itemsInCart.findIndex(({ product: { id } }) => id === product.id);
 
@@ -24,7 +23,7 @@ const Product = (product) => {
   let quantity = cartItem ? cartItem.quantity : 0;
 
   return (
-    <Grid >
+    <Grid>
       <Card sx={{ maxWidth: 250 }}>
         <CardMedia component="img" src={image} />
         <CardContent>

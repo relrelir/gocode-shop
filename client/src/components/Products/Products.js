@@ -5,7 +5,7 @@ import "./Products.css";
 
 const Products = ({ filteredProducts }) => {
   return (
-    <Grid item xs={4} sm={4} md={4} spacing={2}>
+    <Grid item xs={4} sm={4} md={4}>
       {filteredProducts.map(
         ({
           image,

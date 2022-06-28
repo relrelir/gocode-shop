@@ -93,7 +93,7 @@ const Header = ({
                     key={index}
                     value={category}
                     selected={currentCategory === category}
-                    helperText="Please select category"
+                    helpertext="Please select category"
                   >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
                   </MenuItem>

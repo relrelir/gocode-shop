@@ -1,19 +1,38 @@
 import express from "express";
-
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
 
-const Product = mongoose.model("Product", {
-  title: String,
-  price: Number,
-  description: String,
-  image: String,
-  category: String,
-  rating: { rate: Number, count: Number },
-});
+const productSchema = new mongoose.Schema(
+  {
+    title: String,
+    price: Number,
+    description: String,
+    image: String,
+    category: String,
+    rating: { rate: Number, count: Number },
+  },
+  {
+    toJSON: {
+      transform(doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+      },
+    },
+  }
+);
+const Product = mongoose.model("Product", productSchema);
+
+// const Product = mongoose.model("Product", {
+//   title: String,
+//   price: Number,
+//   description: String,
+//   image: String,
+//   category: String,
+//   rating: { rate: Number, count: Number },
+// });
 
 app.use(express.json());
 // Serve static files from the React app
@@ -57,9 +76,9 @@ app.get("/api/products/:productId", (req, res) => {
 
   Product.findById(productId)
     .then((product) => {
-      console.log(product._id);
-      console.log(productId);
-      if (product !== undefined) {
+      if (!product) {
+        res.send("Product not found").status(404);
+      } else {
         res.send(product).status(200);
       }
     })
@@ -127,41 +146,22 @@ const PORT = process.env.PORT || 8000;
 
 const { mongodb_pass, mongodb_user, mongodb_host, mongodb_name } = process.env;
 
+// mongoose
+//   .connect(
+//     `mongodb+srv://${mongodb_user}:${mongodb_pass}@${mongodb_host}/${mongodb_name}`
+//   )
+//   .then(() => {
+//     app.listen(PORT);
+//   });
+
 mongoose
   .connect(
     `mongodb+srv://${mongodb_user}:${mongodb_pass}@${mongodb_host}/${mongodb_name}`
   )
-  .then(() => {
+  .then(async () => {
+    if (!(await Product.count())) {
+      let products = JSON.parse(await fsp.readFile("./products.json", "utf-8"));
+      await Product.insertMany(products);
+    }
     app.listen(PORT);
   });
-// mongoose.connect("mongodb://localhost:27017/ariel_products").then(() => {
-//   app.listen(8000);
-// });
-
-// app.get("/products", (req, res)  => {
-
-// }
-
-//   fsp
-//     .readFile("./en.txt", "utf-8")
-//     .then((enTxt) => {
-//       fsp
-//         .readFile("./translations.json", "utf-8")
-//         .then((jason) => {
-//           const translations = JSON.parse(jason);
-
-//           for (let i = 0; i < translations.length; i++) {
-//             let translation = translations[i];
-//             if (translation.en === enTxt) {
-//               fsp.writeFile("./he.txt", translation.he);
-//               console.log("translation ID:", translation.id);
-//               response.end("done translating");
-//             }
-//           }
-//         })
-//         .catch((error) => console.log(error));
-//     })
-//     .catch((error) => console.log(error));
-// };
-
-// http
