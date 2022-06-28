@@ -1,19 +1,24 @@
 import { useContext } from "react";
 import cartContext from "../../context/cartContext";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 
 import "./Cart.css";
 import { useState } from "react";
 
 const Cart = () => {
-  const { itemsInCart, updateCartItem, totalPrice, cartItem } =
+  const { itemsInCart, updateCartItem, totalPrice, cartItem, qtty, setQtty } =
     useContext(cartContext);
   // const { image, title, price } = product;
   return itemsInCart.length > 0 ? (
     itemsInCart.map(({ product, quantity, note }, index) => (
       <>
         <Card key={index} sx={{ maxWidth: "150px" }}>
-          <CardMedia component="img" image={product.image} />
+          <CardMedia
+            sx={{ maxWidth: "15px" }}
+            component="img"
+            image={product.image}
+          />
+
           <CardContent>
             <Typography>
               <span className="cart">{product.title}</span>
@@ -27,6 +32,7 @@ const Cart = () => {
             width={"15%"}
             onClick={() => {
               updateCartItem(index, product, quantity - 1, cartItem?.note);
+
               totalPrice();
             }}
           >
@@ -48,13 +54,12 @@ const Cart = () => {
           <button
             onClick={() => {
               updateCartItem(index, product, ++quantity, cartItem?.note);
+
               totalPrice();
             }}
           >
             +
           </button>
-
-          <br />
         </Card>
       </>
     ))

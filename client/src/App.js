@@ -14,6 +14,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [price, setprice] = useState(0);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [qtty, setQtty] = useState(null);
 
   const updateCartItem = (index, product, quantity = 0, note = "") => {
     let cartItem = itemsInCart[index];
@@ -56,6 +57,8 @@ function App() {
           updateCartItem,
           price,
           totalPrice,
+          qtty,
+          setQtty,
         }}
       >
         {" "}
@@ -77,12 +80,12 @@ function App() {
           </Typography>
           <Grid
             container
-            direction="column"
+            direction="row"
             justifyContent="space-evenly"
             alignItems="stretch"
+            spacing={4}
           >
             <Cart />
-            <br />
           </Grid>
           <Typography
             sx={{
