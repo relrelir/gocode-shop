@@ -5,24 +5,14 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
-const productSchema = new mongoose.Schema(
-  {
-    title: String,
-    price: Number,
-    description: String,
-    image: String,
-    category: String,
-    rating: { rate: Number, count: Number },
-  },
-  {
-    toJSON: {
-      transform(doc, ret, options) {
-        ret.id = ret._id;
-        delete ret._id;
-      },
-    },
-  }
-);
+const productSchema = new mongoose.Schema({
+  title: String,
+  price: Number,
+  description: String,
+  image: String,
+  category: String,
+  rating: { rate: Number, count: Number },
+});
 const Product = mongoose.model("Product", productSchema);
 
 // const Product = mongoose.model("Product", {
@@ -146,22 +136,22 @@ const PORT = process.env.PORT || 8000;
 
 const { mongodb_pass, mongodb_user, mongodb_host, mongodb_name } = process.env;
 
-// mongoose
-//   .connect(
-//     `mongodb+srv://${mongodb_user}:${mongodb_pass}@${mongodb_host}/${mongodb_name}`
-//   )
-//   .then(() => {
-//     app.listen(PORT);
-//   });
-
 mongoose
   .connect(
     `mongodb+srv://${mongodb_user}:${mongodb_pass}@${mongodb_host}/${mongodb_name}`
   )
-  .then(async () => {
-    if (!(await Product.count())) {
-      let products = JSON.parse(await fsp.readFile("./products.json", "utf-8"));
-      await Product.insertMany(products);
-    }
+  .then(() => {
     app.listen(PORT);
   });
+
+// mongoose
+//   .connect(
+//     `mongodb+srv://${mongodb_user}:${mongodb_pass}@${mongodb_host}/${mongodb_name}`
+//   )
+//   .then(async () => {
+//     if (!(await Product.count())) {
+//       let products = JSON.parse(await fsp.readFile("./products.json", "utf-8"));
+//       await Product.insertMany(products);
+//     }
+//     app.listen(PORT);
+//   });
